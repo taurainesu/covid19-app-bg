@@ -25,9 +25,11 @@ app.get('/', function(req, res){
         'headers': {
         }
     };
-    request(options, function (error, response) { 
-        if (error) throw new Error(error);
-        console.log(response.body);       
-        res.render('index', {apiData:response.body});
+    request(options, function (error, response) {
+        var rawData=response.body;
+        var apiData=JSON.parse(response.body); 
+        if (error) throw new Error(error);     
+        res.render('index', {apiData, rawData});
+        console.log(typeof apiData);
     });
 });

@@ -30,7 +30,7 @@
                     <div class="card-body bg-light">
                         <h5 class="card-title">Raw Stats for Zimbabwe</h5>
                         <div id="jsonData">
-                            <%= apiData %>
+                            <%= rawData %>
                         </div>
                     </div>
                 </div> 
@@ -59,20 +59,20 @@
                                 </tr>                                
                             </thead>
                             <tbody>
-                                <% for (var counter=0; counter<apiData.length; counter++){
-                                    var obj = apiData[counter] %>                                    
+                                <% for (var counter=0; counter<apiData.length; counter++){ %>                                    
                                     <tr>
                                         <td>
-                                            <%= obj.Country %>
+                                            <%= apiData[counter].Country %>
                                         </td>
                                         <td>
-                                            <%= obj.Date %> 
+                                            <%= apiData[counter].Date %> 
                                         </td>
                                         <td>                                    
-                                            <%= obj.Cases %>
+                                            <%= apiData[counter].Confirmed %>
                                         </td>                                                     
                                     </tr>
                                     <% } %>
+
                             </tbody>                            
                         </table>                            
                     </div>
