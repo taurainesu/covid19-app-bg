@@ -1,0 +1,21 @@
+.table-header{
+    background-color: rgb(147, 231, 231);
+    
+}
+
+#headerTable:hover{
+    background-color: greenyellow;
+}
+
+#headerTable{
+    background-color:  rgb(147, 231, 231);
+}
+
+.card{
+    margin-top: 2rem;
+}
+
+.right-align-btn{
+    margin-top: 2rem;
+    margin-left: 60rem;
+}

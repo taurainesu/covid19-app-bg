@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <!--<link href="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">-->
+    <link rel="stylesheet" href="../css/styles.css">
 
 
     <title>
@@ -22,68 +23,74 @@
 
     <body>
 
+        <%- include('./partials/nav-bar.ejs') %>
+
 
         <form action="/" method="POST">
-            <div class="container-fluid">
+            <div class="container-fluid">               
                 
                 <div class="card">
                     <div class="card-body bg-light">
-                        <h5 class="card-title">Raw Stats for Zimbabwe</h5>
-                        <div id="jsonData">
-                            <%= rawData %>
-                        </div>
-                    </div>
-                </div> 
-                  
-                <br>
-                <br>
-
-                <div class="card">
-                    <div class="card-body bg-light">
-                    <h5 class="card-title">Daily Statistics for Zimbabwe</h5>                   
-                    
-                    
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Country
-                                    </th>
-                                    <th>
-                                        Date
-                                    </th>
-                                    <th>
-                                        Confirmed Cases
-                                    </th>
-                                </tr>                                
-                            </thead>
-                            <tbody>
-                                <% for (var counter=0; counter<apiData.length; counter++){ %>                                    
-                                    <tr>
-                                        <td>
-                                            <%= apiData[counter].Country %>
-                                        </td>
-                                        <td>
-                                            <%= apiData[counter].Date %> 
-                                        </td>
-                                        <td>                                    
-                                            <%= apiData[counter].Confirmed %>
-                                        </td>                                                     
-                                    </tr>
-                                    <% } %>
-
-                            </tbody>                            
-                        </table>                            
-                    </div>
-                    
-                    
-                    </div>
+                        <h5 class="card-title">Viral Progression</h5>
+                        <canvas id="myChart"></canvas>
+                    </div>                    
                 </div>
-                             
+                <button type="button" id="refreshBtn" name="refreshBtn" class="btn btn-primary right-align-btn" onclick="addData(myChart, datesArray, confirmedArray);">Refresh Graph</button>
+                
+       
                 
             </div> 
-        </form>   
+        </form>       
+
+
+        
+        <script>            
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['13/4/20', 'Tuesday', '15/4/20', '16/4/20', '17/4/20', '18/4/20', '19/4/20', '20/4/20', '21/4/20', '22/4/20'],
+                    datasets: [{
+                        label: 'Number of Infections',
+                        data: [14, 17, 17, 23, 23, 24, 25, 25, 25, 28], 
+                        borderColor: [
+                            'red'
+                        ],
+                        borderWidth: 1,
+                        pointHoverBorderWidth: 5,
+                        pointHoverBorderColor: 'red', 
+                        fill: false                       
+                    }]
+                },
+                options: {
+                    title:{
+                        display:true,
+                        text:'Infection Progression Over The Last Ten(10) Days'
+                    },
+                    legend:{
+                        position:'right',
+                        display:false
+                    },
+                    layout:{
+                        padding:{
+                            left: 100,
+                            right: 100,
+                            top:40,
+                            bottom: 40
+                        }
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: false
+                            }
+                        }]
+                    }
+                }
+            });
+
+            
+        </script>
         
 
         <!-- Bootstrap core JavaScript-->
