@@ -71,3 +71,19 @@ app.get('/rawData', function(req, res){
         res.render('rawData', {apiData, rawData, datesArray, confirmedArray});
     }); 
 });
+
+app.get('/contactForm', function(req, res){
+    var request = require('request');
+    var options = {
+        'method': 'GET',
+        'url': 'https://api.covid19api.com/live/country/zimbabwe/status/confirmed',
+        'headers': {
+        }
+    };
+    request(options, function (error, response) {
+        var rawData=response.body;
+        apiData=JSON.parse(response.body); 
+        if (error) throw new Error(error);     
+        res.render('contactForm', {apiData, rawData, datesArray, confirmedArray});
+    });
+});
